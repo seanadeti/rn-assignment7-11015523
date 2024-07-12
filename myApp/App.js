@@ -6,14 +6,28 @@ import HomeScreen from './components/HomeScreen';
 import ProductDetailScreen from './components/ProductDetailScreen';
 import CartScreen from './components/CartScreen';
 import { CartProvider } from './global/CartContext';
+import { TouchableOpacity, Image } from 'react-native';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-const HomeStack = () => (
+const HomeStack = ({ navigation }) => (
   <Stack.Navigator initialRouteName="Home">
-    <Stack.Screen name=" " component={HomeScreen} />
-    <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+    <Stack.Screen 
+      name=" Open Fashion"
+      component={HomeScreen} 
+      options={{
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
+            <Image 
+              source={require('./assets/shoppingBag.png')}
+              style={{ width: 30, height: 30, marginRight: 15 }} 
+            />
+          </TouchableOpacity>
+        ),
+      }}
+    />
+    <Stack.Screen name="Product Detail" component={ProductDetailScreen} />
     <Stack.Screen name="Cart" component={CartScreen} />
   </Stack.Navigator>
 );

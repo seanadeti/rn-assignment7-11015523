@@ -28,6 +28,7 @@ export const CartProvider = ({ children }) => {
     const updatedCart = [...cartItems, { ...product, uuid: uuidv4() }];
     setCartItems(updatedCart);
     await AsyncStorage.setItem('cartItems', JSON.stringify(updatedCart));
+    Alert.alert("Success", `${product.title} has been added to the cart.`);
   };
 
   const removeFromCart = async (productId) => {
